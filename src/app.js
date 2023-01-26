@@ -1,16 +1,23 @@
-import express from 'express'
-import serverless from 'serverless-http'
+const express = require('express');
+const serverless = require('serverless-http');
 
 const app = express()
 
 const router = express.Router()
 
 router.get('/', (req, res)=> {
- res.json({
-    message: 'Hello from the Express Server'
- })
+   res.json({
+      message: 'Hello from the Express Server'
+   })
 })
 
-app.use('/netlify/functions/api', router)
+router.get('/test', (req, res)=> {
+   res.json({
+      message: 'Hello Test!!!!'
+   })
+})
 
-module.exports.handler = serverless(app)
+app.use('/.netlify/functions/app', router)
+
+module.exports = app;
+module.exports.handler = serverless(app);
