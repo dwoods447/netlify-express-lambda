@@ -11,6 +11,6 @@ router.get('/', (req, res)=> {
  })
 })
 
-app.use('/netlify/functions/api.', router)
+app.use('./netlify/functions/api', router)
 
-export default serverless(app)
+module.exports.handler = serverless(app)
